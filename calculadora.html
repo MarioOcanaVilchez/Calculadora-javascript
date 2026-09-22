@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Calculadora</title>
+    <link rel='stylesheet' href='calculadora.css'>
+    <script src="calculadora.js"></script>
+</head>
+<body>
+    <div id="calculadora">
+        <div class="top-panel">
+            <div class="solar-badge">
+                <span class="solar-dots">▚▚▚▚</span>
+                <span class="two-way">TWO WAY POWER</span>
+            </div>
+            <div class="brand-row">
+                <span class="brand">CASIO</span>
+                <span class="model">fx-82MS</span>
+            </div>
+        </div>
+        <p id="num"></p>
+        <p id="num2"></p>
+        <p id="signo"></p>
+
+        <div class="screen">
+            <p id="resultadoAnt">0</p>
+            <p id="resultado"></p>
+        </div>
+        <div class="keypad">
+            <button id="Ans" class="key key-fn" onclick="aniadeAns(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,document.getElementById('resultadoAnt').textContent)">Ans</button>
+            <button id="elevado" class="key key-fn" onclick="aniadeSigno('^',document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent)">x^y</button>
+            <button id="del" class="key key-clear" onclick="eliminaCaracter(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,document.getElementById('resultado').textContent)">DEL</button>
+            <button id="ac" class="key key-clear" onclick="resetear()">AC</button>
+
+            <button id="7" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,7)">7</button>
+            <button id="8" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,8)">8</button>
+            <button id="9" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,9)">9</button>
+            <button id="/" class="key key-op" onclick="aniadeSigno('/',document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent)">÷</button>
+
+            <button id="4" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,4)">4</button>
+            <button id="5" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,5)">5</button>
+            <button id="6" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,6)">6</button>
+            <button id="*" class="key key-op" onclick="aniadeSigno('*',document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent)">×</button>
+
+            <button id="1" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,1)">1</button>
+            <button id="2" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,2)">2</button>
+            <button id="3" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,3)">3</button>
+            <button id="-" class="key key-op" onclick="aniadeSigno('-',document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent)">-</button>
+
+            <button id="0" class="key key-num key-zero" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,0)">0</button>
+            <button id="punto" class="key key-num" onclick="aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,'.')">.</button>
+            <button id="igual" class="key key-equals" onclick="hacerOperacion(document.getElementById('signo').textContent,document.getElementById('num').textContent,document.getElementById('num2').textContent)">=</button>
+            <button id="+" class="key key-op" onclick="aniadeSigno('+',document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent)">+</button>
+        </div>
+    </div>
+</body>
+</html>
