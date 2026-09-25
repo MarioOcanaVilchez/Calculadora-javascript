@@ -258,7 +258,7 @@ body {
     width: auto;
     height: 98dvh;
     max-height: 98dvh;
-    aspect-ratio: 320 / 430; /* antes 320/520 — más ancha respecto al alto, como en vertical */
+    aspect-ratio: 320 / 380; /* antes 320/520 — más ancha respecto al alto, como en vertical */
     max-width: 420px; /* evita que se pase de gruesa en pantallas muy anchas y bajas */
     padding: clamp(8px, 2vh, 18px) clamp(10px, 2vh, 16px) clamp(10px, 2.5vh, 22px);
     border-radius: 18px 18px 28px 28px;
