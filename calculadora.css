@@ -244,65 +244,65 @@ body {
     }
 }
 
-/* ===== Mobile landscape: zero vertical scroll ===== */
+/* ===== Mobile landscape: same layout, just scaled up, zero vertical scroll ===== */
 @media (orientation: landscape) and (max-height: 600px) {
     body {
         background-color: #1a1d23; /* dark side margins */
         padding: 4px;
     }
 
+    /* Misma distribución (top-panel > pantalla > teclado), pero ya no
+       limitada a 320px de ancho: crece para llenar el alto disponible
+       manteniendo la proporción, como si fuera un "zoom" del diseño normal. */
     #calculadora {
-        width: min(88vw, 560px);
-        max-height: 98dvh;
+        width: auto;
         height: 98dvh;
-        padding: 6px 10px 8px;
-        border-radius: 14px 14px 20px 20px;
-        gap: 4px;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: flex-start;
-    }
-
-    .top-panel {
-        width: 100%;
-        padding: 0 2px;
+        max-height: 98dvh;
+        aspect-ratio: 320 / 520; /* misma proporción que en vertical/escritorio, solo más grande */
+        padding: clamp(8px, 2vh, 18px) clamp(10px, 2vh, 16px) clamp(10px, 2.5vh, 22px);
+        border-radius: 18px 18px 28px 28px;
+        gap: clamp(4px, 1.2vh, 14px);
+        flex-direction: column;
     }
 
     .screen {
-        width: 42%;
-        min-height: 0;
-        flex: 0 0 auto;
-        padding: 6px 10px 4px;
-        margin-right: 2%;
+        min-height: clamp(40px, 10vh, 64px);
+        padding: clamp(6px, 1.5vh, 10px) 12px clamp(4px, 1vh, 8px);
     }
 
     #resultadoAnt {
-        font-size: clamp(9px, 2vh, 11px);
-        min-height: 0;
+        font-size: clamp(10px, 2vh, 13px);
+        min-height: clamp(11px, 2vh, 16px);
     }
 
     #resultado {
-        font-size: clamp(16px, 4vh, 22px);
-        min-height: 0;
+        font-size: clamp(18px, 4.5vh, 28px);
+        min-height: clamp(22px, 5vh, 34px);
     }
 
     .keypad {
-        width: 56%;
-        gap: 3px;
-        grid-auto-rows: 1fr;
+        gap: clamp(4px, 1vh, 8px);
     }
 
     .key {
-        padding: 2px 0;
-        font-size: clamp(10px, 2.4vh, 13px);
-        border-radius: 6px;
+        padding: clamp(6px, 1.8vh, 12px) 0;
+        font-size: clamp(12px, 2.8vh, 15px);
     }
 
     .key-fn {
-        font-size: clamp(8px, 2vh, 10px);
+        font-size: clamp(9px, 2.2vh, 12px);
     }
 
     .key-clear {
-        font-size: clamp(9px, 2vh, 11px);
+        font-size: clamp(10px, 2.4vh, 13px);
+    }
+
+    .key-op,
+    .key-equals {
+        font-size: clamp(13px, 3vh, 17px);
+    }
+
+    #punto {
+        font-size: clamp(13px, 3vh, 18px);
     }
 }
