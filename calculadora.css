@@ -255,15 +255,16 @@ body {
        limitada a 320px de ancho: crece para llenar el alto disponible
        manteniendo la proporción, como si fuera un "zoom" del diseño normal. */
     #calculadora {
-        width: auto;
-        height: 98dvh;
-        max-height: 98dvh;
-        aspect-ratio: 320 / 520; /* misma proporción que en vertical/escritorio, solo más grande */
-        padding: clamp(8px, 2vh, 18px) clamp(10px, 2vh, 16px) clamp(10px, 2.5vh, 22px);
-        border-radius: 18px 18px 28px 28px;
-        gap: clamp(4px, 1.2vh, 14px);
-        flex-direction: column;
-    }
+    width: auto;
+    height: 98dvh;
+    max-height: 98dvh;
+    aspect-ratio: 320 / 430; /* antes 320/520 — más ancha respecto al alto, como en vertical */
+    max-width: 420px; /* evita que se pase de gruesa en pantallas muy anchas y bajas */
+    padding: clamp(8px, 2vh, 18px) clamp(10px, 2vh, 16px) clamp(10px, 2.5vh, 22px);
+    border-radius: 18px 18px 28px 28px;
+    gap: clamp(4px, 1.2vh, 14px);
+    flex-direction: column;
+}
 
     .screen {
         min-height: clamp(40px, 10vh, 64px);
