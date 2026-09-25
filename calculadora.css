@@ -2,32 +2,43 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
-    min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #1a1d23;
     font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden;
+    padding: 8px;
 }
 
 #num,
 #num2,
 #signo,
-#respuestaAnt {
+#resultadoActual {
     display: none;
 }
 
-/*body*/
+/* body */
 #calculadora {
-    width: 320px;
-    padding: 18px 16px 22px;
+    width: min(320px, 92vw);
+    max-height: 96dvh;
+    padding: clamp(10px, 3vw, 18px) clamp(10px, 3vw, 16px) clamp(14px, 4vw, 22px);
     background: linear-gradient(180deg, #6b7280 0%, #545a63 100%);
     border-radius: 18px 18px 28px 28px;
     box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6px, 2vh, 14px);
+    overflow: hidden;
 }
 
 /* hig panel */
@@ -35,8 +46,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 2px 6px 14px;
+    padding: 2px 6px 0;
     color: #e8e9ec;
+    flex-shrink: 0;
 }
 
 .solar-badge {
@@ -46,7 +58,7 @@ body {
 }
 
 .solar-dots {
-    font-size: 10px;
+    font-size: clamp(8px, 2vw, 10px);
     letter-spacing: 2px;
     color: #2e3238;
     background: #b9bcc2;
@@ -56,7 +68,7 @@ body {
 }
 
 .two-way {
-    font-size: 7px;
+    font-size: clamp(6px, 1.5vw, 7px);
     font-weight: 700;
     letter-spacing: 0.5px;
     color: #d7d9dc;
@@ -69,7 +81,7 @@ body {
 
 .brand {
     display: block;
-    font-size: 15px;
+    font-size: clamp(13px, 3vw, 15px);
     font-weight: 800;
     font-style: italic;
     color: #f2f3f4;
@@ -78,7 +90,7 @@ body {
 
 .model {
     display: block;
-    font-size: 11px;
+    font-size: clamp(10px, 2.5vw, 11px);
     font-weight: 600;
     color: #2f5fa8;
 }
@@ -87,17 +99,17 @@ body {
 .screen {
     background: #aeb9a8;
     border-radius: 4px;
-    padding: 10px 12px 8px;
-    margin-bottom: 14px;
+    padding: clamp(6px, 2vh, 10px) 12px clamp(5px, 1.5vh, 8px);
     box-shadow:
         inset 0 3px 6px rgba(0, 0, 0, 0.35),
         inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-    min-height: 64px;
+    min-height: clamp(48px, 12vh, 64px);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .screen p {
@@ -106,42 +118,63 @@ body {
     color: #2a2f28;
     width: 100%;
     text-align: right;
-    white-space: nowrap;      /* nunca rompe a una segunda línea */
-    overflow-x: auto;         /* si no cabe, se puede desplazar */
+    white-space: nowrap;
+    overflow-x: auto;
     overflow-y: hidden;
-    word-break: normal;       /* ya no hace falta partir palabras */
-    scrollbar-width: none;    /* oculta la barra en Firefox */
-}
-.screen p::-webkit-scrollbar {
-    display: none;            
+    word-break: normal;
+    scrollbar-width: none;
 }
 
-#resultadoAnt {
-    font-size: 13px;
-    opacity: 0.75;
-    min-height: 16px;
+.screen p::-webkit-scrollbar {
+    display: none;
 }
 
 #resultado {
-    font-size: 28px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-family: 'Courier New', monospace;
+    color: #2a2f28;
+    text-align: right;
+    white-space: nowrap;
+
+    font-size: clamp(20px, 6vw, 28px);
     font-weight: 700;
-    min-height: 34px;
+    min-height: clamp(26px, 6vh, 34px);
     letter-spacing: 1px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
 }
 
+#resultado::-webkit-scrollbar {
+    display: none;
+}
+
+#resultadoAnt {
+    font-size: clamp(11px, 3vw, 13px);
+    opacity: 0.75;
+    min-height: clamp(13px, 3vh, 16px);
+}
 
 .keypad {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: clamp(5px, 1.5vh, 8px);
+    flex: 1;
+    min-height: 0;
 }
-
 
 .key {
     border: none;
     border-radius: 8px;
-    padding: 12px 0;
-    font-size: 15px;
+    padding: clamp(8px, 2.2vh, 12px) 0;
+    font-size: clamp(13px, 3.2vw, 15px);
     font-weight: 600;
     cursor: pointer;
     color: #ffffff;
@@ -172,14 +205,14 @@ body {
 .key-fn {
     background: #2f5fa8;
     color: #ffffff;
-    font-size: 12px;
+    font-size: clamp(10px, 2.6vw, 12px);
 }
 
 /* Clear keys (AC, DEL) — orange/red accent */
 .key-clear {
     background: #c0562f;
     color: #ffffff;
-    font-size: 13px;
+    font-size: clamp(11px, 2.8vw, 13px);
 }
 
 #ac {
@@ -190,24 +223,86 @@ body {
 .key-op {
     background: #7e828a;
     color: #1c1d20;
-    font-size: 17px;
+    font-size: clamp(14px, 3.6vw, 17px);
 }
 
-/* Equals key — teal/blue accent, spans visually distinct */
+/* Equals key — teal/blue accent */
 .key-equals {
     background: #3a7d6f;
     color: #ffffff;
-    font-size: 17px;
+    font-size: clamp(14px, 3.6vw, 17px);
 }
 
 /* Decimal point key */
 #punto {
-    font-size: 18px;
+    font-size: clamp(14px, 3.6vw, 18px);
 }
-
 
 @media (max-width: 360px) {
     #calculadora {
         width: 92vw;
+    }
+}
+
+/* ===== Mobile landscape: zero vertical scroll ===== */
+@media (orientation: landscape) and (max-height: 600px) {
+    body {
+        background-color: #1a1d23; /* dark side margins */
+        padding: 4px;
+    }
+
+    #calculadora {
+        width: min(88vw, 560px);
+        max-height: 98dvh;
+        height: 98dvh;
+        padding: 6px 10px 8px;
+        border-radius: 14px 14px 20px 20px;
+        gap: 4px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+
+    .top-panel {
+        width: 100%;
+        padding: 0 2px;
+    }
+
+    .screen {
+        width: 42%;
+        min-height: 0;
+        flex: 0 0 auto;
+        padding: 6px 10px 4px;
+        margin-right: 2%;
+    }
+
+    #resultadoAnt {
+        font-size: clamp(9px, 2vh, 11px);
+        min-height: 0;
+    }
+
+    #resultado {
+        font-size: clamp(16px, 4vh, 22px);
+        min-height: 0;
+    }
+
+    .keypad {
+        width: 56%;
+        gap: 3px;
+        grid-auto-rows: 1fr;
+    }
+
+    .key {
+        padding: 2px 0;
+        font-size: clamp(10px, 2.4vh, 13px);
+        border-radius: 6px;
+    }
+
+    .key-fn {
+        font-size: clamp(8px, 2vh, 10px);
+    }
+
+    .key-clear {
+        font-size: clamp(9px, 2vh, 11px);
     }
 }

@@ -9,12 +9,14 @@ function aniadeNum(num,num2,signo,numAniadir){
     } else{
         if (numAniadir == '.' && num2.length < 9) num2 = aniadePunto(num2);
         else if (num2.length < 9){
-            num2 = num2 = num2 + numAniadir;
+            num2 = num2 + numAniadir;
             num2 = Number(num2);
         }
         document.getElementById("num2").textContent = num2;
     }
-    document.getElementById("resultado").textContent = num + ' ' + signo + ' ' + num2;
+    document.getElementById("resultadoActual").textContent = num + ' ' + signo + ' ' + num2;
+    document.getElementById("resultado").value = num + ' ' + signo + ' ' + num2;
+    actualizarScroll();
 }
 function aniadeSigno(signoNuevo,num,num2,signo){
     if (num == '' && signoNuevo == '-'){ 
@@ -36,7 +38,9 @@ function aniadeSigno(signoNuevo,num,num2,signo){
             document.getElementById("signo").textContent = signo;
         }
     }
-    document.getElementById("resultado").textContent = num + ' ' + signo + ' ' + num2;
+    document.getElementById("resultadoActual").textContent = num + ' ' + signo + ' ' + num2;
+    document.getElementById("resultado").value = num + ' ' + signo + ' ' + num2;
+    actualizarScroll();
 }
 function hacerOperacion(signo,num,num2){
     if (num == '' || num == '-') num = 0;
@@ -60,11 +64,13 @@ function hacerOperacion(signo,num,num2){
     }
     document.getElementById("num2").textContent = "";
     document.getElementById("signo").textContent = "";
-    if (num == 0 && signo == '/' || num == Infinity || num == -Infinity) document.getElementById("resultado").textContent = 'Math ERROR';
-    else document.getElementById("resultado").textContent = num;
+    if ((num == 0 && signo == '/') || num == Infinity || num == -Infinity) document.getElementById("resultadoActual").textContent = 'Math ERROR';
+    else document.getElementById("resultadoActual").textContent = num;
     if (num == Infinity || num == -Infinity) num = 0;
     document.getElementById("num").textContent = num;
     document.getElementById("resultadoAnt").textContent = num;
+    document.getElementById("resultado").value = num;
+    actualizarScroll();
 }
 function aniadePunto(num){
     if (cuentaPuntos(num) == 0){
@@ -84,7 +90,9 @@ function resetear(){
     document.getElementById("num").textContent = '';
     document.getElementById("num2").textContent = '';
     document.getElementById("signo").textContent = '';
-    document.getElementById("resultado").textContent = '';
+    document.getElementById("resultadoActual").textContent = '';
+    document.getElementById("resultado").value = '';
+    actualizarScroll();
 }
 function aniadeAns(num,num2,signo,ans){
     if (signo == '' && num.length + ans.length < 9 || signo == '' && num.length == 0){
@@ -98,7 +106,9 @@ function aniadeAns(num,num2,signo,ans){
         num2 = Number(num2);
         document.getElementById("num2").textContent = num2;
     }
-    document.getElementById("resultado").textContent = num + ' ' + signo + ' ' + num2;
+    document.getElementById("resultadoActual").textContent = num + ' ' + signo + ' ' + num2;
+    document.getElementById("resultado").value = num + ' ' + signo + ' ' + num2;
+    actualizarScroll();
 }
 function eliminaCaracter(num,num2,signo){
     if (num2 != '') num2 = num2.substring(0,num2.length - 1);
@@ -107,19 +117,65 @@ function eliminaCaracter(num,num2,signo){
     document.getElementById("num").textContent = num;
     document.getElementById("signo").textContent = signo;
     document.getElementById("num2").textContent = num2;
-    document.getElementById("resultado").textContent = num + ' ' + signo + ' ' + num2;
+    document.getElementById("resultadoActual").textContent = num + ' ' + signo + ' ' + num2;
+    document.getElementById("resultado").value = num + ' ' + signo + ' ' + num2;
+    actualizarScroll();
 }
 // Mantiene el scroll del display siempre al máximo a la derecha
 document.addEventListener('DOMContentLoaded', function () {
     const resultado = document.getElementById('resultado');
 
-    const observer = new MutationObserver(function () {
+    resultado.addEventListener('input', function () {
         resultado.scrollLeft = resultado.scrollWidth;
     });
+});
+function actualizarScroll() {
+    const resultado = document.getElementById('resultado');
+    resultado.scrollLeft = resultado.scrollWidth;
+}
+function cambiaOperacionTeclado(){
+    input = document.getElementById('resultado').value;
+    textoAnt = document.getElementById('resultadoActual').textContent;
+    numeros = '1234567890.';
+    operaciones = '+-*/^';
+    //Añadimos valor
+    if (input.length > textoAnt.length){
+        caracter = input.substring(input.length - 1);
+        if (numeros.includes(caracter)) aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,input.substring(input.length - 1)); //añade numero
+        else if (operaciones.includes(caracter)) aniadeSigno(input.substring(input.length - 1),document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent);//añade operacion
+        //Quitar valor
+    } else {
+        if (textoAnt == '') return;
+        eliminaCaracter(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent);
+    }
+}
 
-    observer.observe(resultado, {
-        childList: true,
-        characterData: true,
-        subtree: true
+function detectarEnter(event) {
+
+    if (event.key == 'Enter') {
+
+        hacerOperacion(
+            document.getElementById('signo').textContent,
+            document.getElementById('num').textContent,
+            document.getElementById('num2').textContent
+        );
+
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const resultado = document.getElementById('resultado');
+    function colocarCursorAlFinal() {
+        resultado.focus();
+        resultado.setSelectionRange(
+            resultado.value.length,
+            resultado.value.length
+        );
+    }
+    resultado.addEventListener('focus', colocarCursorAlFinal);
+    resultado.addEventListener('click', colocarCursorAlFinal);
+    resultado.addEventListener('mouseup', function () {
+        colocarCursorAlFinal();
     });
+    resultado.addEventListener('keyup', colocarCursorAlFinal);
 });

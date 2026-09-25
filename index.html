@@ -25,7 +25,8 @@
 
         <div class="screen">
             <p id="resultadoAnt">0</p>
-            <p id="resultado"></p>
+            <p id="resultadoActual"></p>
+            <input id="resultado" type="text" oninput="cambiaOperacionTeclado()" onkeydown="detectarEnter(event)">
         </div>
         <div class="keypad">
             <button id="Ans" class="key key-fn" onclick="aniadeAns(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,document.getElementById('resultadoAnt').textContent)">Ans</button>
