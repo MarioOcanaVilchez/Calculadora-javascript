@@ -143,7 +143,10 @@ function cambiaOperacionTeclado(){
         caracter = input.substring(input.length - 1);
         if (numeros.includes(caracter)) aniadeNum(document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent,input.substring(input.length - 1)); //añade numero
         else if (operaciones.includes(caracter)) aniadeSigno(input.substring(input.length - 1),document.getElementById('num').textContent,document.getElementById('num2').textContent,document.getElementById('signo').textContent);//añade operacion
-        else input.value = textoAnt;
+        else {
+            document.getElementById('resultado').value = textoAnt;
+            actualizarScroll();
+        }
         //Quitar valor
     } else {
         if (textoAnt == '') return;
