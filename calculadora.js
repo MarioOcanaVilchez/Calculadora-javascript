@@ -64,12 +64,16 @@ function hacerOperacion(signo,num,num2){
     }
     document.getElementById("num2").textContent = "";
     document.getElementById("signo").textContent = "";
-    if ((num == 0 && signo == '/') || num == Infinity || num == -Infinity) document.getElementById("resultadoActual").textContent = 'Math ERROR';
-    else document.getElementById("resultadoActual").textContent = num;
+    if ((num2 == 0 && signo == '/') || num == Infinity || num == -Infinity){
+         document.getElementById("resultadoActual").textContent = 'Math ERROR';
+         document.getElementById("resultado").value = 'Math ERROR';
+    }else{
+     document.getElementById("resultadoActual").textContent = num;
+     document.getElementById("resultado").value = num;
+    }
     if (num == Infinity || num == -Infinity) num = 0;
     document.getElementById("num").textContent = num;
     document.getElementById("resultadoAnt").textContent = num;
-    document.getElementById("resultado").value = num;
     actualizarScroll();
 }
 function aniadePunto(num){
